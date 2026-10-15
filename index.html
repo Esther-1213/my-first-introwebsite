@@ -1,0 +1,131 @@
+
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <!-- 기본 문서 설정 -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F4F0E8">
+
+  <!-- 검색 및 브라우저 정보 -->
+  <meta
+    name="description"
+    content="Yewon Chung — Service design, HCI, research and creative technology portfolio."
+  >
+  <title>Yewon Chung — Portfolio</title>
+
+  <!-- 웹폰트: Archivo + Noto Sans KR -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- CSS 파일 연결 -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- JavaScript 파일 연결 -->
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <div class="site-shell">
+
+    <!-- 상단 메뉴 -->
+    <header class="site-header">
+
+      <!-- 사이트 로고 -->
+      <a
+        class="site-logo"
+        href="#about"
+        aria-label="Yewon Chung home"
+      >
+        YEWON<span class="asterisk">✳</span>CHUNG
+      </a>
+
+      <!-- ABOUT / WORKS 메뉴 -->
+      <nav class="site-nav" aria-label="Main navigation">
+
+        <a href="#about" data-nav="about">
+          ABOUT
+        </a>
+
+        <a href="#works" data-nav="works">
+          WORKS <sup>08</sup>
+        </a>
+
+      </nav>
+
+      <!-- 이메일 바로가기 -->
+      <a
+        class="header-contact"
+        href="mailto:yppah32@snu.ac.kr"
+      >
+        LET'S TALK ↗
+      </a>
+
+    </header>
+
+    <!--
+      실제 페이지 내용이 표시되는 영역
+
+      ABOUT 페이지
+      WORKS 목록
+      프로젝트 상세 페이지
+
+      위 콘텐츠는 script.js에서 생성됩니다.
+    -->
+    <main id="app" tabindex="-1"></main>
+
+    <!-- 하단 푸터 -->
+    <footer class="site-footer">
+
+      <span>
+        © <span id="year"></span> YEWON CHUNG
+      </span>
+
+      <span>
+        RESEARCH · DESIGN · CREATIVE TECHNOLOGY
+      </span>
+
+      <a href="mailto:yppah32@snu.ac.kr">
+        EMAIL ↗
+      </a>
+
+    </footer>
+
+  </div>
+
+  <!--
+    프로젝트 이미지를 클릭했을 때
+    크게 보여주는 이미지 확대창
+  -->
+  <dialog
+    id="lightbox"
+    class="lightbox"
+    aria-label="Expanded project image"
+  >
+
+    <!-- 닫기 버튼 -->
+    <button
+      type="button"
+      class="lightbox-close"
+      aria-label="Close image"
+    >
+      ×
+    </button>
+
+    <!-- 확대 이미지 -->
+    <img src="" alt="">
+
+    <!-- 이미지 설명 -->
+    <p class="lightbox-caption"></p>
+
+  </dialog>
+
+</body>
+</html>
