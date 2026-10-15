@@ -1,0 +1,4686 @@
+
+/* =========================================================
+   YEWON CHUNG — EDITORIAL PORTFOLIO
+   STYLE.CSS
+
+   DESIGN DIRECTION
+   Dutch Design Week × Independent Art Publishing
+   Editorial Typography × Minimal Interaction
+
+   CONTENT
+   01. Design Tokens
+   02. Reset & Base
+   03. Header & Navigation
+   04. About
+   05. Experiences & Awards
+   06. Works
+   07. Project Detail
+   08. Image Gallery
+   09. Lightbox
+   10. Footer
+   11. Responsive Design
+   ========================================================= */
+
+
+/* =========================================================
+   01. DESIGN TOKENS
+   사이트 전체에서 사용하는 색상 및 설정
+   ========================================================= */
+
+:root {
+  /* 종이 질감이 느껴지는 따뜻한 배경 */
+  --paper: #F4F0E8;
+
+  /* 완전한 검정보다 부드러운 차콜 */
+  --ink: #292A27;
+
+  /* 보조 텍스트 */
+  --muted: #77786F;
+
+  /* 식물에서 영감을 받은 세이지 그린 */
+  --sage: #A3AD98;
+
+  /* 포인트 컬러: 러스트 */
+  --rust: #A65A43;
+
+  /* 구분선 */
+  --line: #D9D5CC;
+
+  /* 이미지 및 카드 배경 */
+  --surface: #EAE6DE;
+
+  /* 영문 타이포그래피 */
+  --font-display: "Archivo", sans-serif;
+
+  /* 한글 및 본문 */
+  --font-body: "Noto Sans KR", sans-serif;
+
+  /* 전체 콘텐츠 최대 너비 */
+  --max-width: 1600px;
+
+  /* 좌우 여백 */
+  --page-padding: clamp(20px, 4.5vw, 80px);
+
+  /* 헤더 높이 */
+  --header-height: 88px;
+}
+
+
+/* =========================================================
+   02. RESET & BASE
+   브라우저 기본 스타일 초기화
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+figure,
+blockquote,
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+::selection {
+  background: var(--sage);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--rust);
+  outline-offset: 5px;
+}
+
+.site-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#app {
+  flex: 1;
+  min-width: 0;
+}
+
+#app:focus {
+  outline: none;
+}
+
+.page-container {
+  width: min(100%, var(--max-width));
+  margin: 0 auto;
+  padding-inline: var(--page-padding);
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+/* =========================================================
+   03. HEADER & NAVIGATION
+   상단 로고 / ABOUT / WORKS / 이메일
+   ========================================================= */
+
+.site-header {
+  position: relative;
+  z-index: 20;
+
+  width: min(100%, var(--max-width));
+  min-height: var(--header-height);
+
+  margin: 0 auto;
+  padding: 18px var(--page-padding);
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 20px;
+
+  border-bottom: 1px solid var(--line);
+}
+
+.site-logo {
+  width: fit-content;
+
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.075em;
+  white-space: nowrap;
+}
+
+.asterisk {
+  display: inline-block;
+  margin: 0 3px;
+  color: var(--rust);
+  font-size: 17px;
+  vertical-align: 1px;
+}
+
+.site-logo:hover .asterisk {
+  transform: rotate(45deg);
+  transition: transform 300ms ease;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(20px, 3.5vw, 56px);
+}
+
+.site-nav a {
+  position: relative;
+
+  padding: 8px 0;
+
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+
+  transition: color 180ms ease;
+}
+
+.site-nav a:hover,
+.site-nav a.active,
+.site-nav a[aria-current="page"] {
+  color: var(--ink);
+}
+
+.site-nav a.active::after,
+.site-nav a[aria-current="page"]::after {
+  content: "";
+
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  left: 0;
+
+  height: 2px;
+  background: var(--rust);
+}
+
+.site-nav sup {
+  margin-left: 2px;
+
+  color: var(--rust);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.header-contact {
+  justify-self: end;
+
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.025em;
+  white-space: nowrap;
+
+  transition: color 180ms ease;
+}
+
+.header-contact:hover {
+  color: var(--rust);
+}
+
+
+/* =========================================================
+   04. ABOUT PAGE
+   큰 타이포그래피 + 작은 프로필 사진
+   ========================================================= */
+
+.about-page {
+  padding-top: clamp(45px, 7vw, 110px);
+  padding-bottom: 100px;
+}
+
+.eyebrow,
+.section-index,
+.micro-label,
+.editorial-label {
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.065em;
+  text-transform: uppercase;
+}
+
+.about-hero {
+  padding-bottom: clamp(55px, 8vw, 125px);
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.hero-title {
+  margin-top: clamp(20px, 4vw, 55px);
+
+  font-family: var(--font-display);
+  font-size: clamp(60px, 12.2vw, 190px);
+  font-weight: 900;
+  line-height: 0.84;
+  letter-spacing: -0.105em;
+  text-transform: uppercase;
+
+  overflow-wrap: normal;
+}
+
+.hero-title .title-line {
+  display: block;
+}
+
+.hero-title .title-line:last-child {
+  padding-left: clamp(20px, 9vw, 145px);
+}
+
+.hero-title .title-accent {
+  color: var(--rust);
+}
+
+.about-intro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(30px, 7vw, 110px);
+
+  margin-top: clamp(55px, 7vw, 110px);
+  align-items: start;
+}
+
+.about-identity {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.contributor {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.profile-photo {
+  width: 94px;
+  height: 116px;
+  flex-shrink: 0;
+
+  object-fit: cover;
+  object-position: center;
+
+  background: var(--surface);
+  filter: grayscale(100%);
+}
+
+.contributor-info {
+  padding-top: 2px;
+}
+
+.contributor-name {
+  font-family: var(--font-display);
+  font-size: clamp(19px, 2vw, 26px);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.055em;
+}
+
+.contributor-role {
+  margin-top: 10px;
+
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.identity-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  max-width: 340px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.identity-meta p {
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.identity-meta strong {
+  display: inline-block;
+  min-width: 90px;
+
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.about-statement {
+  max-width: 780px;
+}
+
+.about-statement p {
+  margin-bottom: 20px;
+
+  font-size: clamp(15px, 1.35vw, 19px);
+  font-weight: 400;
+  line-height: 1.9;
+  letter-spacing: -0.025em;
+}
+
+.about-statement p:first-child {
+  font-weight: 500;
+}
+
+.about-statement p:last-child {
+  margin-bottom: 0;
+}
+
+.about-interests {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 35px;
+
+  padding: 65px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.interests-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 11px;
+  align-content: start;
+}
+
+.interest-tag {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 36px;
+  padding: 7px 13px;
+
+  border: 1px solid var(--line);
+  border-radius: 0;
+
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+.interest-tag:hover {
+  background: var(--sage);
+  border-color: var(--sage);
+}
+
+
+/* =========================================================
+   05. EXPERIENCES & AWARDS
+   이력서보다 에디토리얼한 행 기반 구성
+   ========================================================= */
+
+.editorial-section {
+  padding: clamp(55px, 7vw, 100px) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.editorial-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+
+  margin-bottom: 35px;
+}
+
+.editorial-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 55px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.075em;
+  text-transform: uppercase;
+}
+
+.editorial-section-count {
+  color: var(--rust);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.editorial-list {
+  border-top: 1px solid var(--line);
+}
+
+.editorial-row {
+  display: grid;
+  grid-template-columns: minmax(95px, 0.45fr) minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: clamp(15px, 3vw, 45px);
+
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+
+  align-items: baseline;
+}
+
+.editorial-row:last-child {
+  border-bottom: 0;
+}
+
+.editorial-date {
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.editorial-name {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.65;
+  letter-spacing: -0.025em;
+}
+
+.editorial-description {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.85;
+}
+
+.about-contact {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 30px;
+
+  padding-top: clamp(65px, 8vw, 120px);
+}
+
+.about-contact-title {
+  margin-top: 18px;
+
+  font-family: var(--font-display);
+  font-size: clamp(42px, 7vw, 110px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.085em;
+}
+
+.contact-link {
+  display: inline-block;
+  padding-bottom: 6px;
+
+  border-bottom: 1px solid var(--ink);
+
+  font-family: var(--font-display);
+  font-size: clamp(13px, 1.4vw, 19px);
+  font-weight: 700;
+  white-space: nowrap;
+
+  transition: color 180ms ease;
+}
+
+.contact-link:hover {
+  color: var(--rust);
+  border-color: var(--rust);
+}
+
+
+/* =========================================================
+   06. WORKS PAGE
+   필터 + 비대칭 프로젝트 그리드
+   ========================================================= */
+
+.works-page {
+  padding-top: clamp(45px, 7vw, 100px);
+  padding-bottom: 120px;
+}
+
+.works-heading {
+  padding-bottom: clamp(45px, 6vw, 90px);
+}
+
+.works-title {
+  margin-top: 20px;
+
+  font-family: var(--font-display);
+  font-size: clamp(75px, 16vw, 240px);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.105em;
+}
+
+.works-subtitle {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+
+  margin-top: 32px;
+  padding-top: 18px;
+
+  border-top: 1px solid var(--line);
+
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.works-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+
+  margin-bottom: 38px;
+}
+
+.works-filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.filter-button {
+  padding: 10px 15px;
+
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.3;
+
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.filter-button:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.filter-button.active,
+.filter-button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.works-total {
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(18px, 3vw, 48px);
+  row-gap: clamp(65px, 8vw, 130px);
+}
+
+.work-card {
+  grid-column: span 6;
+  min-width: 0;
+}
+
+.work-card:nth-child(4n + 1) {
+  grid-column: span 7;
+}
+
+.work-card:nth-child(4n + 2) {
+  grid-column: span 5;
+  padding-top: clamp(30px, 6vw, 100px);
+}
+
+.work-card:nth-child(4n + 3) {
+  grid-column: span 5;
+  padding-top: clamp(20px, 4vw, 70px);
+}
+
+.work-card:nth-child(4n + 4) {
+  grid-column: span 7;
+}
+
+.work-card-link {
+  display: block;
+}
+
+.work-card-image {
+  position: relative;
+  overflow: hidden;
+
+  aspect-ratio: 1.3 / 1;
+  background: var(--surface);
+}
+
+.work-card:nth-child(4n + 2) .work-card-image,
+.work-card:nth-child(4n + 3) .work-card-image {
+  aspect-ratio: 0.95 / 1;
+}
+
+.work-card-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 550ms cubic-bezier(.2, .7, .2, 1);
+}
+
+.work-card-link:hover .work-card-image img {
+  transform: scale(1.045);
+}
+
+.work-card-number {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+
+  padding: 5px 8px;
+
+  background: var(--paper);
+  color: var(--ink);
+
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.work-card-info {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 15px;
+
+  margin-top: 20px;
+}
+
+.work-card-category {
+  margin-bottom: 8px;
+
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.work-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.35vw, 35px);
+  font-weight: 800;
+  line-height: 1.17;
+  letter-spacing: -0.065em;
+}
+
+.work-card-subtitle {
+  margin-top: 11px;
+
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.work-card-arrow {
+  padding-top: 4px;
+
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1;
+  transition: transform 180ms ease;
+}
+
+.work-card-link:hover .work-card-arrow {
+  transform: translate(4px, -4px);
+}
+
+
+/* =========================================================
+   07. PROJECT DETAIL PAGE
+   프로젝트별 독립적인 에디토리얼 페이지
+   ========================================================= */
+
+.detail-page {
+  padding-top: clamp(30px, 5vw, 75px);
+  padding-bottom: 120px;
+}
+
+.detail-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 0;
+
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 800;
+
+  transition: color 180ms ease;
+}
+
+.detail-back:hover {
+  color: var(--rust);
+}
+
+.detail-header {
+  margin-top: clamp(40px, 6vw, 90px);
+  margin-bottom: clamp(40px, 6vw, 85px);
+}
+
+.detail-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  margin-bottom: 28px;
+}
+
+.detail-category {
+  color: var(--rust);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.detail-year {
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.detail-title {
+  max-width: 1200px;
+
+  font-family: var(--font-display);
+  font-size: clamp(45px, 8.2vw, 130px);
+  font-weight: 900;
+  line-height: 0.98;
+  letter-spacing: -0.09em;
+  overflow-wrap: break-word;
+}
+
+.detail-tagline {
+  max-width: 900px;
+  margin-top: 28px;
+
+  font-family: var(--font-display);
+  font-size: clamp(17px, 2.2vw, 29px);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.04em;
+}
+
+.detail-summary {
+  max-width: 900px;
+  margin-top: 26px;
+
+  font-size: clamp(14px, 1.35vw, 18px);
+  line-height: 1.9;
+  word-break: keep-all;
+}
+
+.detail-hero {
+  margin: 0;
+  background: var(--surface);
+}
+
+.detail-hero img {
+  width: 100%;
+  max-height: 800px;
+  object-fit: contain;
+}
+
+.detail-hero figcaption {
+  padding: 12px 0;
+
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.detail-overview {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.75fr) minmax(0, 2fr);
+  gap: clamp(35px, 7vw, 110px);
+
+  margin-top: clamp(65px, 9vw, 130px);
+  padding-bottom: clamp(60px, 8vw, 110px);
+
+  border-bottom: 1px solid var(--line);
+}
+
+.detail-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.detail-meta-group {
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.detail-meta-label {
+  margin-bottom: 8px;
+
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.detail-meta-value {
+  font-size: 12px;
+  line-height: 1.85;
+}
+
+.detail-intro {
+  max-width: 850px;
+}
+
+.detail-intro p {
+  margin-bottom: 22px;
+
+  font-size: clamp(15px, 1.5vw, 20px);
+  line-height: 1.9;
+  word-break: keep-all;
+}
+
+.detail-intro p:last-child {
+  margin-bottom: 0;
+}
+
+.detail-content {
+  padding-top: clamp(65px, 8vw, 115px);
+}
+
+.detail-section {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.75fr) minmax(0, 2fr);
+  gap: clamp(35px, 7vw, 110px);
+
+  padding: clamp(45px, 6vw, 85px) 0;
+  border-top: 1px solid var(--line);
+}
+
+.detail-section-index {
+  color: var(--rust);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.detail-section-body {
+  max-width: 900px;
+}
+
+.detail-section-title {
+  margin-bottom: 22px;
+
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3.2vw, 47px);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.06em;
+  word-break: keep-all;
+}
+
+.detail-section-body p {
+  margin-bottom: 18px;
+
+  font-size: 15px;
+  line-height: 2;
+  word-break: keep-all;
+}
+
+.detail-section-body p:last-child {
+  margin-bottom: 0;
+}
+
+.detail-section-body strong {
+  font-weight: 700;
+}
+
+.detail-section-body ul {
+  margin: 15px 0 20px 20px;
+  padding: 0;
+}
+
+.detail-section-body li {
+  margin-bottom: 9px;
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+.detail-section-kicker {
+  margin-bottom: 12px;
+
+  color: var(--rust);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.detail-highlight {
+  margin: 28px 0;
+  padding: 25px 30px;
+
+  border-left: 3px solid var(--rust);
+  background: var(--surface);
+
+  font-size: clamp(16px, 1.7vw, 23px);
+  font-weight: 600;
+  line-height: 1.65;
+}
+
+.detail-document-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  margin-top: 25px;
+}
+
+.document-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-height: 44px;
+  padding: 12px 17px;
+
+  border: 1px solid var(--ink);
+  background: transparent;
+
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.4;
+
+  transition:
+    background 180ms ease,
+    color 180ms ease;
+}
+
+.document-link:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.document-link.primary {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.document-link.primary:hover {
+  background: var(--rust);
+  border-color: var(--rust);
+}
+
+.project-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+
+  margin-top: 100px;
+  padding-top: 25px;
+
+  border-top: 1px solid var(--line);
+}
+
+.project-navigation a {
+  font-family: var(--font-display);
+  font-size: clamp(12px, 1.3vw, 17px);
+  font-weight: 800;
+}
+
+.project-navigation a:hover {
+  color: var(--rust);
+}
+
+
+/* =========================================================
+   08. IMAGE GALLERY
+   이미지 중심의 프로젝트 상세 구성
+   ========================================================= */
+
+.detail-gallery {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 45px);
+
+  margin: 35px 0 clamp(65px, 8vw, 120px);
+}
+
+.gallery-item {
+  grid-column: span 6;
+  min-width: 0;
+}
+
+.gallery-item.full,
+.gallery-item.wide {
+  grid-column: span 12;
+}
+
+.gallery-item.narrow {
+  grid-column: span 4;
+}
+
+.gallery-item figure {
+  margin: 0;
+}
+
+.gallery-image-button {
+  display: block;
+  width: 100%;
+  padding: 0;
+
+  border: 0;
+  background: var(--surface);
+
+  text-align: left;
+  cursor: zoom-in;
+
+  overflow: hidden;
+}
+
+.gallery-image-button img {
+  width: 100%;
+  height: auto;
+  max-height: 850px;
+
+  object-fit: contain;
+
+  transition: transform 300ms ease;
+}
+
+.gallery-image-button:hover img {
+  transform: scale(1.012);
+}
+
+.gallery-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+
+  margin-top: 12px;
+
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.gallery-caption-index {
+  flex-shrink: 0;
+
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   09. LIGHTBOX
+   이미지 클릭 시 전체 화면 확대
+   ========================================================= */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+
+  width: min(96vw, 1450px);
+  max-width: none;
+  max-height: 94vh;
+
+  margin: auto;
+  padding: 55px 25px 25px;
+
+  border: 0;
+  background: var(--paper);
+  color: var(--ink);
+
+  overflow: auto;
+}
+
+.lightbox::backdrop {
+  background: rgba(20, 20, 18, 0.88);
+}
+
+.lightbox img {
+  width: 100%;
+  max-height: calc(94vh - 145px);
+
+  object-fit: contain;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+
+  width: 42px;
+  height: 42px;
+
+  border: 0;
+  background: transparent;
+
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 35px;
+  line-height: 1;
+}
+
+.lightbox-close:hover {
+  color: var(--rust);
+}
+
+.lightbox-caption {
+  margin-top: 15px;
+
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+
+/* =========================================================
+   10. FOOTER
+   ========================================================= */
+
+.site-footer {
+  width: min(100%, var(--max-width));
+  margin: auto auto 0;
+  padding: 22px var(--page-padding) 30px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+
+  border-top: 1px solid var(--line);
+
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+}
+
+.site-footer a {
+  color: var(--ink);
+}
+
+.site-footer a:hover {
+  color: var(--rust);
+}
+
+
+/* =========================================================
+   11. RESPONSIVE DESIGN
+   태블릿 / 모바일 / 작은 모바일
+   ========================================================= */
+
+
+/* ---------- 태블릿 ---------- */
+
+@media (max-width: 1024px) {
+
+  :root {
+    --header-height: 76px;
+  }
+
+  .hero-title {
+    font-size: clamp(65px, 12.5vw, 130px);
+  }
+
+  .about-intro-grid {
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 40px;
+  }
+
+  .about-interests {
+    grid-template-columns: 150px 1fr;
+  }
+
+  .detail-overview,
+  .detail-section {
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 45px;
+  }
+
+  .works-grid {
+    column-gap: 24px;
+  }
+
+}
+
+
+/* ---------- 모바일 ---------- */
+
+@media (max-width: 720px) {
+
+  :root {
+    --page-padding: 20px;
+    --header-height: 72px;
+  }
+
+  body {
+    font-size: 14px;
+  }
+
+  /* 상단 메뉴 */
+
+  .site-header {
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+  }
+
+  .site-logo {
+    font-size: 15px;
+  }
+
+  .site-nav {
+    justify-content: flex-end;
+    gap: 20px;
+  }
+
+  .site-nav a {
+    font-size: 11px;
+  }
+
+  .header-contact {
+    display: none;
+  }
+
+  /* About */
+
+  .about-page {
+    padding-top: 40px;
+    padding-bottom: 65px;
+  }
+
+  .hero-topline {
+    align-items: flex-start;
+  }
+
+  .hero-title {
+    margin-top: 35px;
+    font-size: clamp(48px, 13vw, 94px);
+    letter-spacing: -0.1em;
+  }
+
+  .hero-title .title-line:last-child {
+    padding-left: 7vw;
+  }
+
+  .about-intro-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    margin-top: 60px;
+  }
+
+  .about-identity {
+    gap: 25px;
+  }
+
+  .profile-photo {
+    width: 86px;
+    height: 108px;
+  }
+
+  .about-statement p {
+    font-size: 15px;
+    line-height: 1.85;
+  }
+
+  .about-interests {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 45px 0;
+  }
+
+  /* Experiences */
+
+  .editorial-section {
+    padding: 55px 0;
+  }
+
+  .editorial-section-title {
+    font-size: clamp(28px, 7vw, 42px);
+  }
+
+  .editorial-row {
+    grid-template-columns: 85px 1fr;
+    gap: 7px 16px;
+    padding: 20px 0;
+  }
+
+  .editorial-date {
+    grid-row: span 2;
+  }
+
+  .editorial-description {
+    grid-column: 2;
+  }
+
+  .about-contact {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+    padding-top: 65px;
+  }
+
+  .about-contact-title {
+    font-size: clamp(45px, 11vw, 75px);
+  }
+
+  /* Works */
+
+  .works-page {
+    padding-top: 45px;
+    padding-bottom: 70px;
+  }
+
+  .works-title {
+    font-size: clamp(70px, 18vw, 125px);
+  }
+
+  .works-subtitle {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .works-toolbar {
+    align-items: flex-start;
+  }
+
+  .filter-button {
+    padding: 9px 12px;
+    font-size: 10px;
+  }
+
+  .works-grid {
+    grid-template-columns: 1fr;
+    row-gap: 55px;
+  }
+
+  .work-card,
+  .work-card:nth-child(4n + 1),
+  .work-card:nth-child(4n + 2),
+  .work-card:nth-child(4n + 3),
+  .work-card:nth-child(4n + 4) {
+    grid-column: 1;
+    padding-top: 0;
+  }
+
+  .work-card-image,
+  .work-card:nth-child(4n + 2) .work-card-image,
+  .work-card:nth-child(4n + 3) .work-card-image {
+    aspect-ratio: 1.2 / 1;
+  }
+
+  .work-card-title {
+    font-size: 25px;
+  }
+
+  /* Detail */
+
+  .detail-page {
+    padding-top: 25px;
+    padding-bottom: 75px;
+  }
+
+  .detail-header {
+    margin-top: 35px;
+    margin-bottom: 45px;
+  }
+
+  .detail-title {
+    font-size: clamp(43px, 10vw, 78px);
+  }
+
+  .detail-tagline {
+    font-size: 19px;
+  }
+
+  .detail-summary {
+    font-size: 14px;
+  }
+
+  .detail-overview,
+  .detail-section {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .detail-sidebar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .detail-section {
+    padding: 45px 0;
+  }
+
+  .detail-section-title {
+    font-size: 28px;
+  }
+
+  .detail-section-body p {
+    font-size: 14px;
+    line-height: 1.9;
+  }
+
+  .detail-highlight {
+    padding: 20px;
+  }
+
+  /* Gallery */
+
+  .detail-gallery {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .gallery-item,
+  .gallery-item.full,
+  .gallery-item.wide,
+  .gallery-item.narrow {
+    grid-column: 1;
+  }
+
+  /* Footer */
+
+  .site-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 9px;
+    padding-bottom: 25px;
+  }
+
+}
+
+
+/* ---------- 작은 모바일 ---------- */
+
+@media (max-width: 390px) {
+
+  .site-logo {
+    font-size: 13px;
+  }
+
+  .site-nav {
+    gap: 13px;
+  }
+
+  .site-nav a {
+    font-size: 10px;
+  }
+
+  .hero-title {
+    font-size: 12.2vw;
+  }
+
+  .works-title {
+    font-size: 17vw;
+  }
+
+  .editorial-row {
+    grid-template-columns: 70px 1fr;
+    gap: 7px 12px;
+  }
+
+  .editorial-name {
+    font-size: 13px;
+  }
+
+  .works-total {
+    display: none;
+  }
+
+  .detail-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* =========================================================
+   12. ACCESSIBILITY
+   사용자가 애니메이션 감소를 설정한 경우
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+}
+
+/* ==========================================
+   ORIGINAL IMAGE RATIO FIX
+   캡처 이미지 원본 비율 유지
+   확대 및 잘림 방지
+   ========================================== */
+
+/* 1. Works 목록의 프로젝트 썸네일 */
+
+.work-card-image,
+.work-card:nth-child(4n + 2) .work-card-image,
+.work-card:nth-child(4n + 3) .work-card-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  overflow: hidden;
+  background: #EAE6DE;
+}
+
+.work-card-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  object-position: center;
+  transform: none;
+}
+
+/* 마우스를 올려도 확대되지 않도록 */
+.work-card-link:hover .work-card-image img {
+  transform: none;
+}
+
+/* 2. 프로젝트 상세 페이지 대표 이미지 */
+
+.detail-hero {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.detail-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+}
+
+/* 3. 프로젝트 상세 페이지의 나머지 이미지 */
+
+.gallery-image-button {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.gallery-image-button img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  transform: none;
+}
+
+.gallery-image-button:hover img {
+  transform: none;
+}
+
+/* 4. 이미지 확대창에서도 원본 비율 유지 */
+
+.lightbox img {
+  width: 100%;
+  height: auto;
+  max-height: calc(94vh - 145px);
+  object-fit: contain;
+}
+
+
+/* ==================================================
+   EDITORIAL DESIGN UPGRADE
+   Dutch Design Week × Printed Matter NYC
+   Rust / Sage Graphic System
+   ================================================== */
+
+
+/* 01. 상단 메뉴에 그래픽 포인트 */
+
+.site-header {
+  border-bottom: 3px solid var(--ink);
+}
+
+.site-logo {
+  position: relative;
+  font-size: 19px;
+}
+
+.site-logo .asterisk {
+  color: var(--rust);
+  font-size: 23px;
+}
+
+.site-nav a.active,
+.site-nav a[aria-current="page"] {
+  color: var(--rust);
+}
+
+.header-contact {
+  background: var(--sage);
+  padding: 10px 15px;
+}
+
+.header-contact:hover {
+  background: var(--rust);
+  color: var(--paper);
+}
+
+
+/* 02. ABOUT: 타이포그래피를 디자인 요소로 */
+
+.about-hero {
+  position: relative;
+}
+
+.hero-title {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title .title-line:last-child {
+  color: var(--rust);
+}
+
+.hero-title .title-accent {
+  color: var(--ink);
+}
+
+/* 배경의 커다란 세이지 그래픽 오브젝트 */
+
+.about-hero::before {
+  content: "";
+  position: absolute;
+
+  width: clamp(100px, 18vw, 270px);
+  aspect-ratio: 1;
+
+  right: 3%;
+  top: clamp(95px, 15vw, 210px);
+
+  background: var(--sage);
+  border-radius: 50%;
+
+  z-index: 0;
+  pointer-events: none;
+}
+
+.about-hero::after {
+  content: "✳";
+  position: absolute;
+
+  right: 7%;
+  top: clamp(100px, 16vw, 230px);
+
+  font-family: var(--font-display);
+  font-size: clamp(90px, 15vw, 230px);
+  line-height: 1;
+
+  color: var(--ink);
+  transform: rotate(-15deg);
+
+  z-index: 0;
+  pointer-events: none;
+}
+
+.about-intro-grid {
+  position: relative;
+  z-index: 2;
+}
+
+.profile-photo {
+  border: 5px solid var(--sage);
+  filter: grayscale(100%);
+}
+
+
+/* 03. 자기소개 영역에 편집디자인 포인트 */
+
+.about-statement {
+  border-left: 5px solid var(--rust);
+  padding-left: clamp(20px, 3vw, 40px);
+}
+
+.about-statement p:first-child::first-letter {
+  color: var(--rust);
+  font-weight: 800;
+}
+
+.identity-meta strong {
+  color: var(--rust);
+}
+
+
+/* 04. 관심 분야 태그 */
+
+.about-interests {
+  position: relative;
+}
+
+.interest-tag {
+  border: 0;
+  background: var(--sage);
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.interest-tag:nth-child(3n + 2) {
+  background: var(--rust);
+  color: var(--paper);
+}
+
+.interest-tag:nth-child(3n + 3) {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.interest-tag:hover {
+  transform: translateY(-3px);
+}
+
+
+/* 05. Experiences / Awards */
+
+.editorial-section-title {
+  position: relative;
+}
+
+.editorial-section-title::before {
+  content: "✳";
+  display: inline-block;
+
+  margin-right: 14px;
+  color: var(--rust);
+  font-size: 0.65em;
+  vertical-align: 0.08em;
+}
+
+.editorial-row {
+  transition:
+    background 200ms ease,
+    padding 200ms ease;
+}
+
+.editorial-row:hover {
+  background: var(--sage);
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.editorial-date {
+  color: var(--rust);
+}
+
+
+/* 06. WORKS: 타이포그래피와 필터 */
+
+.works-title {
+  color: var(--rust);
+}
+
+.works-title::first-letter {
+  color: var(--ink);
+}
+
+.works-heading {
+  position: relative;
+}
+
+.works-heading::after {
+  content: "✳";
+  position: absolute;
+
+  right: 3%;
+  top: 0;
+
+  color: var(--sage);
+  font-family: var(--font-display);
+  font-size: clamp(70px, 11vw, 165px);
+  line-height: 1;
+
+  transform: rotate(15deg);
+  pointer-events: none;
+}
+
+.filter-button {
+  border: 0;
+  background: var(--sage);
+  color: var(--ink);
+}
+
+.filter-button.active,
+.filter-button[aria-pressed="true"] {
+  background: var(--rust);
+  border-color: var(--rust);
+  color: var(--paper);
+}
+
+.filter-button:hover {
+  border-color: var(--rust);
+  background: var(--rust);
+  color: var(--paper);
+}
+
+
+/* 07. Works 카드에 색상과 편집 그래픽 추가 */
+
+.work-card-image {
+  background: var(--sage);
+  padding: clamp(8px, 1.2vw, 18px);
+}
+
+.work-card:nth-child(even) .work-card-image {
+  background: #D7A58E;
+}
+
+.work-card:nth-child(3n) .work-card-image {
+  background: #D7DCCF;
+}
+
+.work-card-image img {
+  background: var(--paper);
+}
+
+/* 이미지 번호를 인쇄물 라벨처럼 */
+
+.work-card-number {
+  top: 0;
+  left: 0;
+
+  padding: 9px 13px;
+
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.work-card:nth-child(even) .work-card-number {
+  background: var(--rust);
+}
+
+.work-card-title {
+  transition: color 200ms ease;
+}
+
+.work-card-link:hover .work-card-title {
+  color: var(--rust);
+}
+
+.work-card-category {
+  color: var(--rust);
+  font-weight: 900;
+}
+
+
+/* 08. 프로젝트 상세 페이지 */
+
+.detail-category {
+  display: inline-block;
+
+  background: var(--rust);
+  color: var(--paper);
+
+  padding: 8px 12px;
+}
+
+.detail-title {
+  color: var(--ink);
+}
+
+.detail-tagline {
+  color: var(--rust);
+  font-weight: 700;
+}
+
+.detail-hero {
+  padding: clamp(10px, 2vw, 30px);
+  background: var(--sage);
+}
+
+.detail-hero figcaption {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.detail-section-index {
+  color: var(--rust);
+}
+
+.detail-section:nth-child(even)
+.detail-section-title {
+  color: var(--rust);
+}
+
+.detail-meta-group {
+  border-top: 2px solid var(--ink);
+}
+
+.detail-meta-label {
+  color: var(--rust);
+}
+
+.detail-highlight {
+  background: var(--sage);
+  border-left: 6px solid var(--rust);
+}
+
+
+/* 09. 이미지 갤러리 */
+
+.gallery-image-button {
+  background: var(--sage);
+  padding: clamp(8px, 1.5vw, 20px);
+}
+
+.gallery-item:nth-child(even)
+.gallery-image-button {
+  background: #D7A58E;
+}
+
+.gallery-caption-index {
+  color: var(--rust);
+}
+
+
+/* 10. Contact: 강렬한 마지막 장 */
+
+.about-contact {
+  position: relative;
+
+  margin-top: 60px;
+  padding: clamp(35px, 5vw, 70px);
+
+  background: var(--sage);
+}
+
+.about-contact-title {
+  color: var(--ink);
+}
+
+.contact-link {
+  border-bottom: 2px solid var(--rust);
+  color: var(--rust);
+}
+
+
+/* 11. 모바일에서 오브젝트 크기 조절 */
+
+@media (max-width: 720px) {
+
+  .site-logo {
+    font-size: 15px;
+  }
+
+  .about-hero::before {
+    width: 105px;
+    top: 90px;
+    right: 0;
+  }
+
+  .about-hero::after {
+    font-size: 95px;
+    top: 95px;
+    right: 1%;
+  }
+
+  .about-statement {
+    padding-left: 18px;
+    border-left-width: 3px;
+  }
+
+  .works-heading::after {
+    font-size: 65px;
+    right: 0;
+  }
+
+  .about-contact {
+    margin-top: 35px;
+    padding: 30px 20px;
+  }
+
+  .work-card-image {
+    padding: 10px;
+  }
+
+  .detail-hero {
+    padding: 10px;
+  }
+
+}
+
+/* ==========================================
+   DESIGN REFINEMENT
+   Original Portrait / Meaningful Graphics
+   Static Interest Tags
+   ========================================== */
+
+/* 1. 프로필 사진 원본 컬러 유지 */
+
+.profile-photo {
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+
+/* 2. 의미 없는 장식용 오브젝트 제거 */
+
+.about-hero::before,
+.about-hero::after,
+.works-heading::after,
+.editorial-section-title::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* 3. 관심 분야 태그: 움직임 제거 */
+
+.interest-tag,
+.interest-tag:hover,
+.interest-tag:focus,
+.interest-tag:active {
+  transform: none !important;
+  translate: none !important;
+  animation: none !important;
+  transition: none !important;
+  cursor: default;
+}
+
+/* 4. 기존 태그 색상 조합은 유지 */
+
+.interest-tag {
+  background: var(--sage);
+  color: var(--ink);
+}
+
+.interest-tag:nth-child(3n + 2) {
+  background: var(--rust);
+  color: var(--paper);
+}
+
+.interest-tag:nth-child(3n + 3) {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+
+/* ==========================================================
+   YEWON CHUNG — EDITORIAL ART DIRECTION
+   RISO PRINT × ABSTRACT BOTANICAL × DIGITAL EDITORIAL
+
+   - Existing HTML / JS 유지
+   - Original screenshots remain uncropped
+   - Responsive desktop / tablet / mobile
+   - Static decorative objects
+   ========================================================== */
+
+:root {
+  --paper: #F4F0E8;
+  --ink: #292A27;
+  --rust: #A65A43;
+  --sage: #A3AD98;
+  --sage-light: #D8DED1;
+  --rust-light: #D9AB98;
+  --font-display: "Archivo", "Arial Black", sans-serif;
+}
+
+/* ---------- 01. GLOBAL PAPER TEXTURE ---------- */
+
+html {
+  background: var(--paper);
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/*
+  종이 위에 미세한 잉크 입자가 있는 듯한 질감.
+  외부 이미지 파일이 필요 없는 SVG 노이즈입니다.
+*/
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: .15;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.76' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+}
+
+/* ---------- 02. HEADER ---------- */
+
+.site-header {
+  border-bottom: 2px solid var(--ink);
+  background: var(--paper);
+}
+
+.site-logo .asterisk {
+  color: var(--rust);
+}
+
+.site-nav a.active,
+.site-nav a[aria-current="page"] {
+  color: var(--rust);
+}
+
+.header-contact {
+  background: var(--sage);
+  color: var(--ink);
+  border-radius: 0;
+}
+
+/* ---------- 03. ABOUT HERO ---------- */
+
+.about-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-bottom: 60px;
+}
+
+/* 장식이 텍스트를 덮지 않도록 */
+.about-hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-title {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: -.085em;
+  line-height: .86;
+}
+
+.hero-title .title-line:last-child {
+  color: var(--rust);
+}
+
+.hero-title .title-accent {
+  color: var(--rust);
+}
+
+/*
+  의미 있는 추상 식물 오브젝트:
+  5개의 타원형 잎을 방사형으로 배치한 꽃 모티프.
+
+  단순한 별표 대신 식물의 형태에서 출발합니다.
+*/
+.about-hero::before {
+  content: "";
+  display: block !important;
+  position: absolute;
+  z-index: 0;
+  width: clamp(170px, 28vw, 380px);
+  aspect-ratio: 1;
+  right: 0;
+  top: clamp(110px, 13vw, 180px);
+  opacity: .78;
+  pointer-events: none;
+  border-radius: 0;
+
+  background:
+    radial-gradient(ellipse 21% 41% at 50% 24%, var(--rust) 98%, transparent 100%),
+    radial-gradient(ellipse 21% 41% at 50% 76%, var(--rust) 98%, transparent 100%),
+    radial-gradient(ellipse 41% 21% at 24% 50%, var(--rust) 98%, transparent 100%),
+    radial-gradient(ellipse 41% 21% at 76% 50%, var(--rust) 98%, transparent 100%),
+    radial-gradient(circle at 50% 50%, var(--ink) 0 7%, transparent 7.5%);
+
+  transform: rotate(-24deg);
+}
+
+/*
+  식물 그래픽 뒤의 Sage 잉크 원판.
+  두 도형을 겹쳐 인쇄한 느낌을 만듭니다.
+*/
+.about-hero::after {
+  content: "";
+  display: block !important;
+  position: absolute;
+  z-index: -1;
+  width: clamp(160px, 27vw, 360px);
+  aspect-ratio: 1;
+  right: 7%;
+  top: clamp(130px, 15vw, 205px);
+  background: var(--sage);
+  border-radius: 50%;
+  opacity: .55;
+  transform: none;
+  pointer-events: none;
+}
+
+/* ---------- 04. PORTRAIT ---------- */
+
+.profile-photo {
+  filter: none !important;
+  -webkit-filter: none !important;
+  border: 0 !important;
+  object-fit: cover;
+  background: var(--sage-light);
+}
+
+/* ---------- 05. ABOUT STATEMENT ---------- */
+
+.about-statement {
+  border-left: 4px solid var(--rust);
+  padding-left: clamp(20px, 3vw, 40px);
+  position: relative;
+  z-index: 3;
+}
+
+.about-statement p:first-child::first-letter {
+  color: var(--rust);
+  font-weight: 800;
+}
+
+.identity-meta strong {
+  color: var(--rust);
+}
+
+/* ---------- 06. CURRENTLY EXPLORING ---------- */
+
+.interests-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.interest-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sage);
+  color: var(--ink);
+  border: 0;
+  border-radius: 0;
+  padding: 11px 17px;
+  font-weight: 700;
+  text-align: center;
+
+  /* 클릭 기능이 없는 정보 태그이므로 정적 */
+  cursor: default;
+  transition: none !important;
+  animation: none !important;
+  transform: none !important;
+}
+
+.interest-tag:nth-child(3n + 2) {
+  background: var(--rust);
+  color: var(--paper);
+}
+
+.interest-tag:nth-child(3n + 3) {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.interest-tag:hover {
+  transform: none !important;
+}
+
+/* ---------- 07. EDITORIAL SECTIONS ---------- */
+
+.editorial-section {
+  position: relative;
+}
+
+.editorial-section-title {
+  letter-spacing: -.055em;
+}
+
+.editorial-section-title::before {
+  content: none !important;
+  display: none !important;
+}
+
+.editorial-date {
+  color: var(--rust);
+  font-weight: 800;
+}
+
+.editorial-row:hover {
+  background: var(--sage-light);
+}
+
+/* ---------- 08. WORKS HEADER ---------- */
+
+.works-heading {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.works-title {
+  color: var(--rust);
+  position: relative;
+  z-index: 2;
+  letter-spacing: -.08em;
+}
+
+.works-title::first-letter {
+  color: var(--ink);
+}
+
+/*
+  WORKS 페이지의 그래픽:
+  데이터가 퍼지는 듯한 점 패턴.
+  CSS radial-gradient로 구현.
+*/
+.works-heading::after {
+  content: "";
+  display: block !important;
+  position: absolute;
+  width: 190px;
+  height: 150px;
+  top: 30px;
+  right: 3%;
+  z-index: 0;
+  transform: rotate(-12deg);
+  opacity: .85;
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(circle, var(--rust) 2px, transparent 2.5px);
+  background-size: 16px 16px;
+
+  -webkit-mask-image:
+    radial-gradient(ellipse, black 35%, transparent 72%);
+  mask-image:
+    radial-gradient(ellipse, black 35%, transparent 72%);
+}
+
+/* ---------- 09. FILTERS ---------- */
+
+.filter-button {
+  background: var(--sage);
+  color: var(--ink);
+  border: 0;
+  border-radius: 0;
+}
+
+.filter-button.active,
+.filter-button[aria-pressed="true"] {
+  background: var(--rust);
+  color: var(--paper);
+}
+
+.filter-button:hover {
+  background: var(--rust);
+  color: var(--paper);
+}
+
+/* ---------- 10. WORK CARDS ---------- */
+
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 52px 22px;
+}
+
+.work-card {
+  min-width: 0;
+}
+
+/*
+  스크린샷을 자르지 않고 원본 비율로 표시합니다.
+*/
+.work-card-image,
+.work-card:nth-child(4n + 2) .work-card-image,
+.work-card:nth-child(4n + 3) .work-card-image {
+  position: relative;
+  height: auto;
+  aspect-ratio: auto;
+  overflow: hidden;
+  padding: clamp(10px, 1.5vw, 22px);
+  background: var(--sage-light);
+}
+
+.work-card:nth-child(even) .work-card-image {
+  background: var(--rust-light);
+}
+
+.work-card:nth-child(3n) .work-card-image {
+  background: var(--sage);
+}
+
+.work-card-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  transform: none !important;
+  background: var(--paper);
+}
+
+.work-card-link:hover .work-card-image img {
+  transform: none !important;
+}
+
+/* 인쇄물 번호 라벨 */
+.work-card-number {
+  top: 0;
+  left: 0;
+  padding: 10px 13px;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.work-card:nth-child(even) .work-card-number {
+  background: var(--rust);
+}
+
+.work-card-category {
+  color: var(--rust);
+  font-weight: 800;
+}
+
+.work-card-title {
+  letter-spacing: -.045em;
+}
+
+.work-card-link:hover .work-card-title {
+  color: var(--rust);
+}
+
+/* ---------- 11. DETAIL PAGES ---------- */
+
+.detail-category {
+  background: var(--rust);
+  color: var(--paper);
+  padding: 7px 12px;
+}
+
+.detail-tagline {
+  color: var(--rust);
+}
+
+.detail-hero {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  padding: clamp(10px, 2vw, 25px);
+  background: var(--sage-light);
+}
+
+.detail-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+}
+
+.detail-section-index,
+.detail-meta-label {
+  color: var(--rust);
+}
+
+.detail-section:nth-child(even) .detail-section-title {
+  color: var(--rust);
+}
+
+/* ---------- 12. GALLERY ---------- */
+
+.detail-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px 18px;
+}
+
+.gallery-item {
+  min-width: 0;
+}
+
+.gallery-item.full,
+.gallery-item.wide {
+  grid-column: 1 / -1;
+}
+
+.gallery-item figure {
+  margin: 0;
+}
+
+.gallery-image-button {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: clamp(8px, 1.5vw, 18px);
+  border: 0;
+  background: var(--sage-light);
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+.gallery-item:nth-child(even) .gallery-image-button {
+  background: var(--rust-light);
+}
+
+.gallery-image-button img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  transform: none !important;
+}
+
+.gallery-image-button:hover img {
+  transform: none !important;
+}
+
+/* ---------- 13. CONTACT ---------- */
+
+.about-contact {
+  position: relative;
+  background: var(--sage);
+  padding: clamp(28px, 5vw, 65px);
+  overflow: hidden;
+}
+
+.about-contact-title {
+  position: relative;
+  z-index: 1;
+}
+
+.contact-link {
+  position: relative;
+  z-index: 1;
+  color: var(--rust);
+  overflow-wrap: anywhere;
+}
+
+/* ---------- 14. LIGHTBOX ---------- */
+
+.lightbox img {
+  width: 100%;
+  height: auto;
+  max-height: calc(94vh - 145px);
+  object-fit: contain;
+}
+
+/* ==========================================================
+   RESPONSIVE — TABLET
+   ========================================================== */
+
+@media (max-width: 900px) {
+
+  .about-hero::before {
+    width: 190px;
+    top: 135px;
+    right: 0;
+  }
+
+  .about-hero::after {
+    width: 185px;
+    top: 155px;
+    right: 6%;
+  }
+
+  .works-grid {
+    gap: 36px 16px;
+  }
+
+  .work-card-image {
+    padding: 10px;
+  }
+}
+
+/* ==========================================================
+   RESPONSIVE — MOBILE
+   QR CODE VISITORS / 320px–700px
+   ========================================================== */
+
+@media (max-width: 700px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .page-container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  /* ABOUT */
+
+  .about-hero {
+    padding-bottom: 35px;
+  }
+
+  .hero-title {
+    font-size: clamp(52px, 13vw, 90px);
+    letter-spacing: -.085em;
+  }
+
+  .about-hero::before {
+    width: 100px;
+    top: 110px;
+    right: 0;
+    opacity: .65;
+  }
+
+  .about-hero::after {
+    width: 105px;
+    top: 120px;
+    right: 5%;
+  }
+
+  .about-intro-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+  }
+
+  .about-identity,
+  .about-statement {
+    min-width: 0;
+  }
+
+  .about-statement {
+    border-left-width: 3px;
+    padding-left: 17px;
+  }
+
+  /* INTERESTS */
+
+  .interests-list {
+    gap: 6px;
+  }
+
+  .interest-tag {
+    font-size: 11px;
+    padding: 9px 11px;
+  }
+
+  /* WORKS */
+
+  .works-title {
+    font-size: clamp(64px, 17vw, 110px);
+  }
+
+  .works-heading::after {
+    width: 95px;
+    height: 90px;
+    top: 40px;
+    right: 0;
+  }
+
+  .works-toolbar {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .works-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .filter-button {
+    font-size: 11px;
+    padding: 10px 13px;
+  }
+
+  .works-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
+  }
+
+  .work-card-image {
+    padding: 10px;
+  }
+
+  .work-card-title {
+    overflow-wrap: anywhere;
+  }
+
+  /* DETAIL */
+
+  .detail-title {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .detail-overview {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+  }
+
+  .detail-gallery {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 25px;
+  }
+
+  .gallery-item,
+  .gallery-item.full,
+  .gallery-item.wide {
+    grid-column: 1 / -1;
+  }
+
+  .detail-hero {
+    padding: 10px;
+  }
+
+  .gallery-image-button {
+    padding: 10px;
+  }
+
+  /* CONTACT */
+
+  .about-contact {
+    padding: 28px 18px;
+    flex-wrap: wrap;
+    gap: 22px;
+  }
+
+  .contact-link {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* ==========================================================
+   ACCESSIBILITY
+   ========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* =====================================================
+   INTERACTION REFINEMENT
+   Meaningful Interaction Only
+   ===================================================== */
+
+/* 01. 장식 및 정보 요소의 불필요한 움직임 제거 */
+
+.interest-tag,
+.interest-tag:hover,
+.interest-tag:active,
+.interest-tag:focus,
+.editorial-row,
+.editorial-row:hover,
+.work-card,
+.work-card:hover,
+.work-card-image img,
+.work-card-link:hover .work-card-image img,
+.gallery-image-button img,
+.gallery-image-button:hover img {
+  transform: none !important;
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Experiences / Awards는 클릭할 수 없으므로
+   마우스를 올려도 색상 변경하지 않기 */
+
+.editorial-row,
+.editorial-row:hover {
+  background: transparent !important;
+  padding-left: 0;
+  padding-right: 0;
+  cursor: default;
+}
+
+/* 관심 분야 태그도 정적 */
+
+.interest-tag,
+.interest-tag:hover {
+  transform: none !important;
+  cursor: default;
+}
+
+/* 02. 상단 ABOUT / WORKS 메뉴 */
+
+.site-nav,
+.main-nav,
+.header-nav {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
+/* data-nav는 기존 index.html에 이미 있음 */
+
+a[data-nav] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  min-height: 48px;
+  padding: 12px 23px;
+
+  background: var(--sage);
+  color: var(--ink) !important;
+
+  border: 2px solid transparent;
+  border-radius: 2px;
+
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .025em;
+  text-decoration: none;
+
+  transform: none !important;
+  transition: background-color .15s ease,
+              color .15s ease;
+}
+
+/* 선택된 페이지 */
+
+a[data-nav].active,
+a[data-nav][aria-current="page"] {
+  background: var(--rust) !important;
+  color: var(--paper) !important;
+}
+
+/* 선택되지 않은 버튼에 마우스를 올렸을 때 */
+
+a[data-nav]:not(.active):hover {
+  background: var(--ink);
+  color: var(--paper) !important;
+}
+
+/* 선택된 버튼은 마우스를 올려도 그대로 */
+
+a[data-nav].active:hover {
+  background: var(--rust) !important;
+  color: var(--paper) !important;
+}
+
+/* 키보드 접근성 */
+
+a[data-nav]:focus-visible {
+  outline: 3px solid var(--rust);
+  outline-offset: 3px;
+}
+
+/* 03. 실제로 이동 가능한 Works 카드 */
+
+.work-card-link {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 카드 자체는 움직이지 않음 */
+
+.work-card-link,
+.work-card-link:hover {
+  transform: none !important;
+}
+
+/* 카드 위에 마우스를 올리면
+   정보 영역 배경이 변해서 클릭 가능함을 표시 */
+
+.work-card-info {
+  transition: background-color .15s ease;
+}
+
+.work-card-link:hover .work-card-info {
+  background: var(--sage-light);
+}
+
+/* 프로젝트 제목은 고정 */
+
+.work-card-link:hover .work-card-title {
+  color: var(--ink);
+}
+
+/* 실제 클릭 가능한 화살표만 강조 */
+
+.work-card-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 38px;
+
+  background: var(--sage);
+  color: var(--ink);
+
+  border-radius: 50%;
+  transition: background-color .15s ease,
+              color .15s ease;
+}
+
+.work-card-link:hover .work-card-arrow {
+  background: var(--rust);
+  color: var(--paper);
+  transform: none;
+}
+
+/* 04. Works 필터는 실제로 내용이 바뀌므로
+   버튼 상태를 확실히 표시 */
+
+.filter-button {
+  background: var(--sage);
+  color: var(--ink);
+  border: 2px solid transparent;
+  border-radius: 2px;
+  font-weight: 800;
+
+  transform: none !important;
+  transition: background-color .15s ease,
+              color .15s ease;
+}
+
+.filter-button.active,
+.filter-button[aria-pressed="true"] {
+  background: var(--rust) !important;
+  color: var(--paper) !important;
+}
+
+.filter-button:not(.active):hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.filter-button.active:hover {
+  background: var(--rust);
+  color: var(--paper);
+}
+
+/* 05. 실제 링크만 인터랙션 적용 */
+
+.contact-link,
+.document-link,
+.detail-back,
+.project-navigation a {
+  cursor: pointer;
+  transform: none !important;
+}
+
+.contact-link:hover,
+.document-link:hover,
+.detail-back:hover,
+.project-navigation a:hover {
+  transform: none !important;
+}
+
+/* 06. 모바일: QR로 접속하는 방문자 고려 */
+
+@media (max-width: 700px) {
+
+  a[data-nav] {
+    min-height: 44px;
+    padding: 10px 15px;
+    font-size: 12px;
+  }
+
+  .site-nav,
+  .main-nav,
+  .header-nav {
+    gap: 5px;
+  }
+
+  .work-card-info {
+    padding-top: 14px;
+  }
+
+  /* 터치 환경에서는 hover 효과 제거 */
+
+  @media (hover: none) {
+    .work-card-link:hover .work-card-info {
+      background: transparent;
+    }
+
+    .work-card-link:hover .work-card-arrow {
+      background: var(--sage);
+      color: var(--ink);
+    }
+  }
+}
+
+/* ============================================
+   WORKS FILTER — EDITORIAL INDEX DESIGN
+   ============================================ */
+
+/* 필터 영역을 페이지 중앙에 배치 */
+
+.works-toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  gap: 18px;
+
+  margin: 42px 0 50px;
+  padding: 24px 0;
+
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+
+/* 3개 버튼을 균등한 너비로 */
+
+.works-filters {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  width: min(100%, 760px);
+  gap: 8px;
+}
+
+/* 버튼 자체를 크게 */
+
+.filter-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 72px;
+
+  padding: 16px 12px;
+
+  background: var(--sage);
+  color: var(--ink);
+
+  border: 0;
+  border-radius: 0;
+
+  font-family: var(--font-display);
+  font-size: clamp(12px, 1.4vw, 17px);
+  font-weight: 800;
+  letter-spacing: .035em;
+
+  cursor: pointer;
+  transform: none !important;
+  box-shadow: none;
+}
+
+/* 선택된 필터 */
+
+.filter-button.active,
+.filter-button[aria-pressed="true"] {
+  background: var(--rust) !important;
+  color: var(--paper) !important;
+}
+
+/* 클릭 가능한 버튼만 색상 변경 */
+
+@media (hover: hover) {
+  .filter-button:not(.active):hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+}
+
+/* 프로젝트 개수 */
+
+.works-total {
+  align-self: flex-end;
+
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+
+  color: var(--rust);
+}
+
+/* 태블릿 */
+
+@media (max-width: 900px) {
+  .works-toolbar {
+    margin: 30px 0 40px;
+  }
+
+  .filter-button {
+    min-height: 64px;
+  }
+}
+
+/* 모바일: QR 방문자를 위한 터치 영역 */
+
+@media (max-width: 700px) {
+  .works-toolbar {
+    margin: 25px 0 35px;
+    padding: 18px 0;
+    gap: 12px;
+  }
+
+  .works-filters {
+    width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px;
+  }
+
+  .filter-button {
+    min-width: 0;
+    min-height: 58px;
+
+    padding: 12px 4px;
+
+    font-size: clamp(10px, 3vw, 13px);
+    letter-spacing: 0;
+  }
+
+  .works-total {
+    font-size: 11px;
+  }
+}
+
+/* ==========================================================
+   YEWON CHUNG — EDITORIAL ART DIRECTION
+   RISO PRINT × ABSTRACT BOTANICAL × DIGITAL EDITORIAL
+
+   - Existing HTML / JS 유지
+   - Original screenshots remain uncropped
+   - Responsive desktop / tablet / mobile
+   - Static decorative objects
+   ========================================================== */
+
+:root {
+  --paper: #F4F0E8;
+  --ink: #292A27;
+  --rust: #A65A43;
+  --sage: #A3AD98;
+  --sage-light: #D8DED1;
+  --rust-light: #D9AB98;
+  --font-display: "Archivo", "Arial Black", sans-serif;
+}
+
+/* ---------- 01. GLOBAL PAPER TEXTURE ---------- */
+
+html {
+  background: var(--paper);
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/*
+  종이 위에 미세한 잉크 입자가 있는 듯한 질감.
+  외부 이미지 파일이 필요 없는 SVG 노이즈입니다.
+*/
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: .15;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.76' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+}
+
+/* ---------- 02. HEADER ---------- */
+
+.site-header {
+  border-bottom: 2px solid var(--ink);
+  background: var(--paper);
+}
+
+.site-logo .asterisk {
+  color: var(--rust);
+}
+
+.site-nav a.active,
+.site-nav a[aria-current="page"] {
+  color: var(--rust);
+}
+
+.header-contact {
+  background: var(--sage);
+  color: var(--ink);
+  border-radius: 0;
+}
+
+/* ---------- 03. ABOUT HERO ---------- */
+
+.about-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-bottom: 60px;
+}
+
+/* 장식이 텍스트를 덮지 않도록 */
+.about-hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-title {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: -.085em;
+  line-height: .86;
+}
+
+.hero-title .title-line:last-child {
+  color: var(--rust);
+}
+
+.hero-title .title-accent {
+  color: var(--rust);
+}
+
+/*
+  의미 있는 추상 식물 오브젝트:
+  5개의 타원형 잎을 방사형으로 배치한 꽃 모티프.
+
+  단순한 별표 대신 식물의 형태에서 출발합니다.
+*/
+.about-hero::before {
+  content: "";
+  display: block !important;
+  position: absolute;
+  z-index: 0;
+  width: clamp(170px, 28vw, 380px);
+  aspect-ratio: 1;
+  right: 0;
+  top: clamp(110px, 13vw, 180px);
+  opacity: .78;
+  pointer-events: none;
+  border-radius: 0;
+
+  background:
+    radial-gradient(ellipse 21% 41% at 50% 24%, var(--rust) 98%, transparent 100%),
+    radial-gradient(ellipse 21% 41% at 50% 76%, var(--rust) 98%, transparent 100%),
+    radial-gradient(ellipse 41% 21% at 24% 50%, var(--rust) 98%, transparent 100%),
+    radial-gradient(ellipse 41% 21% at 76% 50%, var(--rust) 98%, transparent 100%),
+    radial-gradient(circle at 50% 50%, var(--ink) 0 7%, transparent 7.5%);
+
+  transform: rotate(-24deg);
+}
+
+/*
+  식물 그래픽 뒤의 Sage 잉크 원판.
+  두 도형을 겹쳐 인쇄한 느낌을 만듭니다.
+*/
+.about-hero::after {
+  content: "";
+  display: block !important;
+  position: absolute;
+  z-index: -1;
+  width: clamp(160px, 27vw, 360px);
+  aspect-ratio: 1;
+  right: 7%;
+  top: clamp(130px, 15vw, 205px);
+  background: var(--sage);
+  border-radius: 50%;
+  opacity: .55;
+  transform: none;
+  pointer-events: none;
+}
+
+/* ---------- 04. PORTRAIT ---------- */
+
+.profile-photo {
+  filter: none !important;
+  -webkit-filter: none !important;
+  border: 0 !important;
+  object-fit: cover;
+  background: var(--sage-light);
+}
+
+/* ---------- 05. ABOUT STATEMENT ---------- */
+
+.about-statement {
+  border-left: 4px solid var(--rust);
+  padding-left: clamp(20px, 3vw, 40px);
+  position: relative;
+  z-index: 3;
+}
+
+.about-statement p:first-child::first-letter {
+  color: var(--rust);
+  font-weight: 800;
+}
+
+.identity-meta strong {
+  color: var(--rust);
+}
+
+/* ---------- 06. CURRENTLY EXPLORING ---------- */
+
+.interests-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.interest-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sage);
+  color: var(--ink);
+  border: 0;
+  border-radius: 0;
+  padding: 11px 17px;
+  font-weight: 700;
+  text-align: center;
+
+  /* 클릭 기능이 없는 정보 태그이므로 정적 */
+  cursor: default;
+  transition: none !important;
+  animation: none !important;
+  transform: none !important;
+}
+
+.interest-tag:nth-child(3n + 2) {
+  background: var(--rust);
+  color: var(--paper);
+}
+
+.interest-tag:nth-child(3n + 3) {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.interest-tag:hover {
+  transform: none !important;
+}
+
+/* ---------- 07. EDITORIAL SECTIONS ---------- */
+
+.editorial-section {
+  position: relative;
+}
+
+.editorial-section-title {
+  letter-spacing: -.055em;
+}
+
+.editorial-section-title::before {
+  content: none !important;
+  display: none !important;
+}
+
+.editorial-date {
+  color: var(--rust);
+  font-weight: 800;
+}
+
+.editorial-row:hover {
+  background: var(--sage-light);
+}
+
+/* ---------- 08. WORKS HEADER ---------- */
+
+.works-heading {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.works-title {
+  color: var(--rust);
+  position: relative;
+  z-index: 2;
+  letter-spacing: -.08em;
+}
+
+.works-title::first-letter {
+  color: var(--ink);
+}
+
+/*
+  WORKS 페이지의 그래픽:
+  데이터가 퍼지는 듯한 점 패턴.
+  CSS radial-gradient로 구현.
+*/
+.works-heading::after {
+  content: "";
+  display: block !important;
+  position: absolute;
+  width: 190px;
+  height: 150px;
+  top: 30px;
+  right: 3%;
+  z-index: 0;
+  transform: rotate(-12deg);
+  opacity: .85;
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(circle, var(--rust) 2px, transparent 2.5px);
+  background-size: 16px 16px;
+
+  -webkit-mask-image:
+    radial-gradient(ellipse, black 35%, transparent 72%);
+  mask-image:
+    radial-gradient(ellipse, black 35%, transparent 72%);
+}
+
+/* ---------- 09. FILTERS ---------- */
+
+.filter-button {
+  background: var(--sage);
+  color: var(--ink);
+  border: 0;
+  border-radius: 0;
+}
+
+.filter-button.active,
+.filter-button[aria-pressed="true"] {
+  background: var(--rust);
+  color: var(--paper);
+}
+
+.filter-button:hover {
+  background: var(--rust);
+  color: var(--paper);
+}
+
+/* ---------- 10. WORK CARDS ---------- */
+
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 52px 22px;
+}
+
+.work-card {
+  min-width: 0;
+}
+
+/*
+  스크린샷을 자르지 않고 원본 비율로 표시합니다.
+*/
+.work-card-image,
+.work-card:nth-child(4n + 2) .work-card-image,
+.work-card:nth-child(4n + 3) .work-card-image {
+  position: relative;
+  height: auto;
+  aspect-ratio: auto;
+  overflow: hidden;
+  padding: clamp(10px, 1.5vw, 22px);
+  background: var(--sage-light);
+}
+
+.work-card:nth-child(even) .work-card-image {
+  background: var(--rust-light);
+}
+
+.work-card:nth-child(3n) .work-card-image {
+  background: var(--sage);
+}
+
+.work-card-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  transform: none !important;
+  background: var(--paper);
+}
+
+.work-card-link:hover .work-card-image img {
+  transform: none !important;
+}
+
+/* 인쇄물 번호 라벨 */
+.work-card-number {
+  top: 0;
+  left: 0;
+  padding: 10px 13px;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.work-card:nth-child(even) .work-card-number {
+  background: var(--rust);
+}
+
+.work-card-category {
+  color: var(--rust);
+  font-weight: 800;
+}
+
+.work-card-title {
+  letter-spacing: -.045em;
+}
+
+.work-card-link:hover .work-card-title {
+  color: var(--rust);
+}
+
+/* ---------- 11. DETAIL PAGES ---------- */
+
+.detail-category {
+  background: var(--rust);
+  color: var(--paper);
+  padding: 7px 12px;
+}
+
+.detail-tagline {
+  color: var(--rust);
+}
+
+.detail-hero {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  padding: clamp(10px, 2vw, 25px);
+  background: var(--sage-light);
+}
+
+.detail-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+}
+
+.detail-section-index,
+.detail-meta-label {
+  color: var(--rust);
+}
+
+.detail-section:nth-child(even) .detail-section-title {
+  color: var(--rust);
+}
+
+/* ---------- 12. GALLERY ---------- */
+
+.detail-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px 18px;
+}
+
+.gallery-item {
+  min-width: 0;
+}
+
+.gallery-item.full,
+.gallery-item.wide {
+  grid-column: 1 / -1;
+}
+
+.gallery-item figure {
+  margin: 0;
+}
+
+.gallery-image-button {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: clamp(8px, 1.5vw, 18px);
+  border: 0;
+  background: var(--sage-light);
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+.gallery-item:nth-child(even) .gallery-image-button {
+  background: var(--rust-light);
+}
+
+.gallery-image-button img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  transform: none !important;
+}
+
+.gallery-image-button:hover img {
+  transform: none !important;
+}
+
+/* ---------- 13. CONTACT ---------- */
+
+.about-contact {
+  position: relative;
+  background: var(--sage);
+  padding: clamp(28px, 5vw, 65px);
+  overflow: hidden;
+}
+
+.about-contact-title {
+  position: relative;
+  z-index: 1;
+}
+
+.contact-link {
+  position: relative;
+  z-index: 1;
+  color: var(--rust);
+  overflow-wrap: anywhere;
+}
+
+/* ---------- 14. LIGHTBOX ---------- */
+
+.lightbox img {
+  width: 100%;
+  height: auto;
+  max-height: calc(94vh - 145px);
+  object-fit: contain;
+}
+
+/* ==========================================================
+   RESPONSIVE — TABLET
+   ========================================================== */
+
+@media (max-width: 900px) {
+
+  .about-hero::before {
+    width: 190px;
+    top: 135px;
+    right: 0;
+  }
+
+  .about-hero::after {
+    width: 185px;
+    top: 155px;
+    right: 6%;
+  }
+
+  .works-grid {
+    gap: 36px 16px;
+  }
+
+  .work-card-image {
+    padding: 10px;
+  }
+}
+
+/* ==========================================================
+   RESPONSIVE — MOBILE
+   QR CODE VISITORS / 320px–700px
+   ========================================================== */
+
+@media (max-width: 700px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .page-container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  /* ABOUT */
+
+  .about-hero {
+    padding-bottom: 35px;
+  }
+
+  .hero-title {
+    font-size: clamp(52px, 13vw, 90px);
+    letter-spacing: -.085em;
+  }
+
+  .about-hero::before {
+    width: 100px;
+    top: 110px;
+    right: 0;
+    opacity: .65;
+  }
+
+  .about-hero::after {
+    width: 105px;
+    top: 120px;
+    right: 5%;
+  }
+
+  .about-intro-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+  }
+
+  .about-identity,
+  .about-statement {
+    min-width: 0;
+  }
+
+  .about-statement {
+    border-left-width: 3px;
+    padding-left: 17px;
+  }
+
+  /* INTERESTS */
+
+  .interests-list {
+    gap: 6px;
+  }
+
+  .interest-tag {
+    font-size: 11px;
+    padding: 9px 11px;
+  }
+
+  /* WORKS */
+
+  .works-title {
+    font-size: clamp(64px, 17vw, 110px);
+  }
+
+  .works-heading::after {
+    width: 95px;
+    height: 90px;
+    top: 40px;
+    right: 0;
+  }
+
+  .works-toolbar {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .works-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .filter-button {
+    font-size: 11px;
+    padding: 10px 13px;
+  }
+
+  .works-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
+  }
+
+  .work-card-image {
+    padding: 10px;
+  }
+
+  .work-card-title {
+    overflow-wrap: anywhere;
+  }
+
+  /* DETAIL */
+
+  .detail-title {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .detail-overview {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+  }
+
+  .detail-gallery {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 25px;
+  }
+
+  .gallery-item,
+  .gallery-item.full,
+  .gallery-item.wide {
+    grid-column: 1 / -1;
+  }
+
+  .detail-hero {
+    padding: 10px;
+  }
+
+  .gallery-image-button {
+    padding: 10px;
+  }
+
+  /* CONTACT */
+
+  .about-contact {
+    padding: 28px 18px;
+    flex-wrap: wrap;
+    gap: 22px;
+  }
+
+  .contact-link {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* ==========================================================
+   ACCESSIBILITY
+   ========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* ==========================================
+   ABSTRACT BOTANICAL ARTWORK
+   Riso Print × Plant Sciences × HCI
+   ========================================== */
+
+/* 기존 CSS로 만든 꽃 오브젝트 제거 */
+
+.about-hero::before,
+.about-hero::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* ABOUT 전체를 기준으로 위치 지정 */
+
+.about-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* 새 SVG 오브젝트 */
+
+.hero-artwork {
+  position: absolute !important;
+
+  width: clamp(260px, 39vw, 540px);
+  height: auto;
+
+  top: clamp(80px, 10vw, 145px);
+  right: -3%;
+
+  z-index: 0 !important;
+  pointer-events: none;
+
+  opacity: 0.92;
+}
+
+/* SVG 비율 유지 */
+
+.hero-artwork svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* 제목은 오브젝트보다 앞에 */
+
+.hero-title {
+  position: relative;
+  z-index: 2 !important;
+}
+
+/* 소개문과 프로필도 앞에 */
+
+.about-intro-grid {
+  position: relative;
+  z-index: 2 !important;
+}
+
+/* 태블릿 */
+
+@media (max-width: 1000px) {
+  .hero-artwork {
+    width: 310px;
+    top: 110px;
+    right: -6%;
+    opacity: 0.65;
+  }
+}
+
+/* 모바일: QR 방문자 고려 */
+
+@media (max-width: 700px) {
+  .hero-artwork {
+    width: clamp(135px, 42vw, 210px);
+    top: 95px;
+    right: -5%;
+    opacity: 0.7;
+  }
+
+  .hero-title {
+    position: relative;
+    z-index: 2;
+  }
+
+  .about-intro-grid {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+
+/* ==========================================
+   HERO ARTWORK POSITION FIX
+   꽃 크기 축소 + 오른쪽 위로 이동
+   ========================================== */
+
+/* 데스크톱 */
+
+.about-hero .hero-artwork {
+  width: clamp(180px, 25vw, 320px);
+
+  top: 25px;
+  right: 0;
+
+  opacity: 0.9;
+}
+
+/* 태블릿 */
+
+@media (max-width: 1000px) {
+  .about-hero .hero-artwork {
+    width: 220px;
+    top: 35px;
+    right: -10px;
+  }
+}
+
+/* 모바일 */
+
+@media (max-width: 700px) {
+  .about-hero .hero-artwork {
+    width: clamp(100px, 28vw, 145px);
+
+    top: 45px;
+    right: -8px;
+
+    opacity: 0.75;
+  }
+}
+
+/* ==========================================
+   FINAL RESPONSIVE WORKS GRID
+   Mobile 1 / Tablet 2 / Desktop 3
+   ========================================== */
+
+/* 1. 기본: 모바일 1열 */
+
+.works-page .works-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 36px 20px;
+  align-items: start;
+}
+
+.works-page .work-card {
+  min-width: 0;
+  width: 100%;
+}
+
+/* 2. 태블릿: 2열 */
+
+@media (min-width: 768px) {
+  .works-page .works-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr)) !important;
+    gap: 42px 22px;
+  }
+}
+
+/* 3. 노트북 / 데스크톱: 3열 */
+
+@media (min-width: 1200px) {
+  .works-page .works-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr)) !important;
+    gap: 48px 24px;
+  }
+}
+
+/* ==========================================
+   CARD IMAGE — ORIGINAL RATIO
+   이미지 확대 / 잘림 방지
+   ========================================== */
+
+.works-page .work-card-image,
+.works-page .work-card:nth-child(n) .work-card-image {
+  width: 100%;
+  height: auto !important;
+  aspect-ratio: auto !important;
+  padding: 10px;
+  overflow: hidden;
+
+  background: var(--sage-light, #D8DED1);
+}
+
+/* 카드마다 인쇄물 같은 배경색 */
+
+.works-page .work-card:nth-child(3n + 2)
+.work-card-image {
+  background: var(--rust-light, #D9AB98);
+}
+
+.works-page .work-card:nth-child(3n + 3)
+.work-card-image {
+  background: var(--sage, #A3AD98);
+}
+
+/* 이미지 원본 비율 유지 */
+
+.works-page .work-card-image img {
+  display: block;
+  width: 100%;
+  height: auto !important;
+  max-height: none !important;
+
+  object-fit: contain !important;
+  object-position: center;
+
+  transform: none !important;
+  transition: none !important;
+}
+
+/* 호버해도 이미지 확대 없음 */
+
+.works-page .work-card-link:hover
+.work-card-image img {
+  transform: none !important;
+}
+
+/* ==========================================
+   CARD TYPOGRAPHY
+   3열에서도 글자가 답답하지 않도록
+   ========================================== */
+
+.works-page .work-card-title {
+  font-size: clamp(19px, 1.8vw, 26px);
+  line-height: 1.18;
+  overflow-wrap: anywhere;
+}
+
+.works-page .work-card-subtitle {
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.works-page .work-card-info {
+  padding-top: 15px;
+}
+
+/* 모바일에서는 제목을 조금 더 크게 */
+
+@media (max-width: 767px) {
+  .works-page .work-card-title {
+    font-size: 23px;
+  }
+
+  .works-page .work-card-image {
+    padding: 12px;
+  }
+}
+
+
+
+/* WORKS 반응형 그리드 */
+
+/* 모바일: 1열 */
+.works-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 36px 20px;
+  width: 100%;
+}
+
+/* 태블릿: 2열 */
+@media (min-width: 768px) {
+  .works-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* 노트북: 3열 */
+@media (min-width: 1200px) {
+  .works-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+/* 카드 너비가 그리드를 밀어내지 않도록 */
+.works-grid > * {
+  min-width: 0 !important;
+  max-width: 100%;
+}
+
+/* 이미지 원본 비율 유지 */
+.works-grid img {
+  display: block;
+  width: 100%;
+  height: auto !important;
+  object-fit: contain !important;
+  transform: none !important;
+}
+
+/* 프로젝트 상세 페이지 이미지 크기 제한 */
+
+.project-detail img,
+.project-gallery img {
+  display: block;
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+  object-fit: contain;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ==========================================
+   WORKS PAGE — FINAL LAYOUT
+   RESEARCH: 이미지 왼쪽 + 설명 오른쪽
+   PROJECTS: 3열 카드
+   MOBILE: 1열
+   ========================================== */
+
+/* RESEARCH / PROJECTS 필터 버튼 */
+
+.works-page .works-filters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: min(100%, 760px);
+  gap: 0;
+}
+
+.works-page .filter-button {
+  width: 100%;
+  min-height: 68px;
+  cursor: pointer;
+}
+
+/* ==========================================
+   RESEARCH
+   ========================================== */
+
+/* 연구 목록은 세로로 배치 */
+
+.works-page .works-grid.research-layout {
+  display: flex !important;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+/* 연구 하나당 가로형 카드 */
+
+.works-page .research-layout .research-card {
+  width: 100%;
+  min-width: 0;
+  padding: 30px 0;
+  border-bottom: 1px solid rgba(41, 42, 39, 0.25);
+}
+
+/* 왼쪽 이미지 42%, 오른쪽 설명 */
+
+.works-page .research-layout .research-card .work-card-link {
+  display: grid;
+  grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(20px, 4vw, 72px);
+  width: 100%;
+}
+
+/* 연구 이미지 */
+
+.works-page .research-layout .work-card-image {
+  width: 100%;
+  height: auto !important;
+  aspect-ratio: auto !important;
+  overflow: hidden;
+}
+
+/* 원본 비율 유지, 잘림 방지 */
+
+.works-page .research-layout .work-card-image img {
+  display: block;
+  width: 100%;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  transform: none !important;
+}
+
+/* 오른쪽 설명 영역 */
+
+.works-page .research-layout .work-card-info {
+  display: flex;
+  align-items: flex-start;
+  padding: 0;
+  min-width: 0;
+}
+
+/* 실제 연구 제목 */
+
+.works-page .research-layout .work-card-title {
+  font-size: clamp(22px, 3vw, 42px);
+  line-height: 1.15;
+  overflow-wrap: break-word;
+}
+
+/* 연구 설명 */
+
+.works-page .research-layout .work-card-subtitle {
+  font-size: clamp(13px, 1.3vw, 16px);
+  line-height: 1.7;
+}
+
+/* ==========================================
+   PROJECTS
+   ========================================== */
+
+/* 태블릿과 노트북에서 3열 */
+
+.works-page .works-grid.projects-layout {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 42px 22px;
+  align-items: start;
+  width: 100%;
+}
+
+/* 카드 크기 제한 */
+
+.works-page .projects-layout .project-card {
+  width: 100%;
+  min-width: 0;
+}
+
+/* 프로젝트 이미지 원본 비율 유지 */
+
+.works-page .projects-layout .work-card-image {
+  width: 100%;
+  height: auto !important;
+  aspect-ratio: auto !important;
+  overflow: hidden;
+}
+
+.works-page .projects-layout .work-card-image img {
+  display: block;
+  width: 100%;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  transform: none !important;
+}
+
+/* 프로젝트 제목 */
+
+.works-page .projects-layout .work-card-title {
+  font-size: clamp(18px, 1.8vw, 26px);
+  line-height: 1.2;
+  overflow-wrap: break-word;
+}
+
+/* 설명 */
+
+.works-page .projects-layout .work-card-subtitle {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* ==========================================
+   TABLET
+   ========================================== */
+
+@media (min-width: 700px) and (max-width: 900px) {
+
+  .works-page .projects-layout .work-card-title {
+    font-size: 18px;
+  }
+
+  .works-page .projects-layout .work-card-subtitle {
+    font-size: 12px;
+  }
+
+  .works-page .works-grid.projects-layout {
+    gap: 30px 15px;
+  }
+}
+
+/* ==========================================
+   MOBILE
+   ========================================== */
+
+@media (max-width: 699px) {
+
+  /* 연구: 이미지 위 + 설명 아래 */
+
+  .works-page .research-layout .research-card .work-card-link {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .works-page .research-layout .research-card {
+    padding: 24px 0;
+  }
+
+  .works-page .research-layout .research-card .work-card-info {
+    padding-top: 0;
+  }
+
+  .works-page .research-layout .work-card-title {
+    font-size: 24px;
+  }
+
+  /* 프로젝트: 1열 */
+
+  .works-page .works-grid.projects-layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 34px;
+  }
+
+  .works-page .projects-layout .work-card-title {
+    font-size: 23px;
+  }
+
+  /* 필터 버튼 */
+
+  .works-page .filter-button {
+    min-height: 56px;
+    font-size: 14px;
+  }
+}
+
+/* =========================================
+   WORKS — RESEARCH & PROJECTS
+   FINAL OVERRIDE
+========================================= */
+
+/* 1. 필터: RESEARCH / PROJECTS */
+
+.works-page .works-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: auto;
+}
+
+.works-page .filter-button {
+  width: auto;
+  min-height: 0;
+  padding: 13px 24px;
+}
+
+/* 혹시 ALL 버튼이 남아 있다면 숨기기 */
+
+.works-page .filter-button[data-filter="all"] {
+  display: none !important;
+}
+
+/* 2. 공통 카드 초기화 */
+
+.works-page .works-grid > .work-card {
+  grid-column: auto !important;
+  grid-row: auto !important;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.works-page .work-card-image {
+  height: auto !important;
+  aspect-ratio: auto !important;
+  overflow: hidden;
+}
+
+.works-page .work-card-image img {
+  display: block;
+  width: 100%;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  transform: none !important;
+}
+
+/* 3. RESEARCH: 한 줄에 연구 하나 */
+
+.works-page .works-grid.research-layout {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+}
+
+.works-page .research-layout .research-card {
+  padding: 32px 0 !important;
+  border-bottom: 1px solid rgba(41,42,39,.2);
+}
+
+.works-page .research-layout .research-card
+.work-card-link {
+  display: grid !important;
+  grid-template-columns:
+    minmax(0, 38%)
+    minmax(0, 1fr) !important;
+  align-items: center;
+  gap: clamp(24px, 5vw, 70px);
+}
+
+/* 연구 이미지: 왼쪽 */
+
+.works-page .research-layout .work-card-image {
+  width: 100%;
+  max-width: 420px;
+  padding: 12px;
+}
+
+/* 연구 제목과 설명: 오른쪽 */
+
+.works-page .research-layout .work-card-info {
+  display: flex;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 0;
+}
+
+.works-page .research-layout .work-card-title {
+  font-size: clamp(21px, 2.5vw, 36px);
+  line-height: 1.2;
+  overflow-wrap: break-word;
+}
+
+.works-page .research-layout .work-card-subtitle {
+  font-size: clamp(13px, 1.2vw, 15px);
+  line-height: 1.7;
+}
+
+/* 4. PROJECTS: 기본 3열 */
+
+.works-page .works-grid.projects-layout {
+  display: grid !important;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr)) !important;
+  gap: 38px 20px !important;
+  align-items: start;
+}
+
+/* 프로젝트 이미지 + 제목은 세로 배치 */
+
+.works-page .projects-layout .work-card-link {
+  display: block;
+}
+
+.works-page .projects-layout .work-card-image {
+  width: 100%;
+  padding: 10px;
+}
+
+.works-page .projects-layout .work-card-info {
+  padding: 15px 0 0;
+}
+
+.works-page .projects-layout .work-card-title {
+  font-size: clamp(17px, 1.7vw, 23px);
+  line-height: 1.25;
+}
+
+.works-page .projects-layout .work-card-subtitle {
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* 5. 좁은 태블릿: 2열 */
+
+@media (min-width: 600px) and (max-width: 767px) {
+  .works-page .works-grid.projects-layout {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* 6. 모바일: 1열 */
+
+@media (max-width: 599px) {
+  .works-page .works-grid.projects-layout {
+    grid-template-columns:
+      minmax(0, 1fr) !important;
+    gap: 36px !important;
+  }
+
+  .works-page .research-layout .research-card
+  .work-card-link {
+    grid-template-columns:
+      minmax(0, 1fr) !important;
+    gap: 18px;
+  }
+
+  .works-page .research-layout .work-card-image {
+    max-width: 100%;
+  }
+
+  .works-page .research-layout .work-card-title {
+    font-size: 24px;
+  }
+
+  .works-page .filter-button {
+    padding: 12px 18px;
+  }
+}
